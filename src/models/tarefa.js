@@ -1,5 +1,6 @@
 const database = require("../database/database")
-const Sequelize = require("sequelize")
+const Sequelize = require("sequelize");
+const Responsavel = require("./responsavel");
 
 const Tarefa = database.define("tarefas", {
     id: {
@@ -19,7 +20,15 @@ const Tarefa = database.define("tarefas", {
         type: Sequelize.DATEONLY,
         allowNull: false
     },
-    id_responsavel: {
-        
+    concluida: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
     }
-}, {})
+}, {
+    timestamp: true
+})
+
+Responsavel.hasMany(Tarefa)
+Tarefa.belongsto(Responsavel)
+
+module.exports = Tarefa

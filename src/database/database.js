@@ -12,6 +12,9 @@ const database = new Sequelize(
 
 console.log(`Databse ${process.env.DB_NAME} criada`)
 
-database.sync()
-
 module.exports = database
+
+// require("../models/responsavel")
+// require("../models/tarefa")
+
+// database.sync()

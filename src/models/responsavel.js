@@ -15,4 +15,8 @@ const Responsavel = database.define ("responsavel", {
         type: Sequelize.DATEONLY,
         allowNull: false
     }
-}, {})
+}, {
+    timestamp: true
+})
+
+module.exports = Responsavel

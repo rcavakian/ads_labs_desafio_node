@@ -1,11 +1,13 @@
 const express = require('express')
 const responsavelController = require("../controllers/responsavel")
+const middleware = require("../middlewares/middlewares")
+
 
 const router = express.Router()
 
 router.get("/", responsavelController.list)
 
-router.post("/", responsavelController.create)
+router.post("/", middleware.validacaoTitulo, responsavelController.create)
 
 router.put("/", responsavelController.update)
 

@@ -17,4 +17,4 @@ module.exports = database
 // require("../models/responsavel")
 // require("../models/tarefa")
 
-// database.sync()
+// database.sync({ alter: true })

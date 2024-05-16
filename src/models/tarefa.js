@@ -1,6 +1,7 @@
 const database = require("../database/database")
 const Sequelize = require("sequelize");
 const Responsavel = require("./responsavel");
+// const Tarefa = require("../tarefa/tarefa");
 
 const Tarefa = database.define("tarefas", {
     id: {
@@ -29,6 +30,6 @@ const Tarefa = database.define("tarefas", {
 })
 
 Responsavel.hasMany(Tarefa)
-Tarefa.belongsto(Responsavel)
+Tarefa.belongsTo(Responsavel)
 
 module.exports = Tarefa

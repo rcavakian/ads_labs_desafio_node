@@ -14,7 +14,7 @@ console.log(`Databse ${process.env.DB_NAME} criada`)
 
 module.exports = database
 
-// require("../models/responsavel")
-// require("../models/tarefa")
+require("../models/responsavel")
+require("../models/tarefa")
 
-// database.sync({ alter: true })
+database.sync({ alter: true })

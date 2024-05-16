@@ -27,6 +27,23 @@ function validacaoNome(req, res, next) {
 
     return next()
 }
+
+/**
+ * Função para verificar o ano de nascimento do responsável, permitindo apenas nascidos em 2014 ou antes.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+function validacaoDataNascimento(req, res, next) { 
+    const data_nascimento = parseInt(req.body.data_nascimento.slice(0, 4))
+
+    if (data_nascimento >= 2014) {
+        return res.status(400).send({ message: "Responsavel invalido, permitido somente nascidos a partir de 2014"})
+    }
+
+    return next()
+}
 /* aqui precisa implementar validação do body, params, head e query para depois chamar essa 
 funcao como callback nas funcoes abaixo (get, post, put e delete)
 */ 

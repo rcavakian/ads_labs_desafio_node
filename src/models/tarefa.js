@@ -1,6 +1,6 @@
 const database = require("../database/database")
 const Sequelize = require("sequelize");
-const Responsavel = require("./responsavel");
+const Responsavel = require("../models/responsavel");
 // const Tarefa = require("../tarefa/tarefa");
 
 const Tarefa = database.define("tarefas", {
@@ -29,7 +29,7 @@ const Tarefa = database.define("tarefas", {
     timestamp: true
 })
 
-Responsavel.hasMany(Tarefa)
+// Responsavel.hasMany(Tarefa)
 Tarefa.belongsTo(Responsavel)
 
 module.exports = Tarefa

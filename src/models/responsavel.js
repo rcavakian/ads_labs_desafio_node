@@ -1,7 +1,7 @@
 const database = require("../database/database")
 const Sequelize = require("sequelize")
 
-const Responsavel = database.define ("responsavel", {
+const Responsavel = database.define ("responsaveis", {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,

@@ -7,9 +7,9 @@ const router = express.Router()
 
 router.get("/", responsavelController.list)
 
-router.post("/", middleware.validacaoTitulo, responsavelController.create)
+router.post("/", middleware.validacaoNome, responsavelController.create)
 
-router.put("/", responsavelController.update)
+router.put("/", middleware.validacaoNome, responsavelController.update)
 
 router.delete("/id:", responsavelController.remove)
 

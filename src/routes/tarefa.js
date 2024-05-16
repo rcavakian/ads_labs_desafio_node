@@ -9,8 +9,8 @@ router.get("/", tarefaController.list)
 
 router.post("/", middleware.validacaoTitulo, tarefaController.create)
 
-router.put("/", tarefaController.update)
+router.put("/:id", tarefaController.update)
 
-router.delete("/id:", tarefaController.remove)
+router.delete("/:id", tarefaController.remove)
 
 module.exports = router

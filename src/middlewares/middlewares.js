@@ -44,6 +44,17 @@ function validacaoDataNascimento(req, res, next) {
 
     return next()
 }
+
+function validacaoDataLimite(req, res, next) { 
+    const data_limite = new Date(req.body.data_limite_conclusao)
+    const data_atual = new Date()
+
+    if (data_limite < data_atual) {
+        return res.status(400).send({ message: "Não é possível concluir essa tarefa: tarefa em atraso" })
+    }
+
+    return next()
+}
 /* aqui precisa implementar validação do body, params, head e query para depois chamar essa 
 funcao como callback nas funcoes abaixo (get, post, put e delete)
 */ 
@@ -51,7 +62,7 @@ funcao como callback nas funcoes abaixo (get, post, put e delete)
 /*
     As seguintes regras de negócio devem ser validadas:
 * As tarefas que passaram da data limite não podem ser Nnalizadas posteriormente
-* Um responsável deve ser nascido no mínimo em 2014
+* Um responsável deve ser nascido no mínimo em 2014 ok
 * Nomes devem ter no mínimo 3 caracteres, permitindo apenas letras ok
 */
 

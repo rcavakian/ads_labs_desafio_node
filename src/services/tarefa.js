@@ -9,9 +9,8 @@ async function create(dados) {
     return novaTarefa
 }
 
-async function update() {
-    return responsaveis = await findAll()
-    return responsaveis
+async function update(idTarefa, dados) {
+    const tarefaEncontrada =  await Tarefa.findbyPk(idTarefa)
 }
 
 async function remove() {

@@ -58,6 +58,13 @@ function validacaoDataLimite(req, res, next) {
     return next()
 }
 
+function checkDataLImite(req, res, next) {
+    if (!req.body.data_limite_conclusao) {
+        return res.status(400).send({ message: "Por favor informe a data limite de conclusão"})
+    }
+    return next()
+}
+
 function validarDataNascimento(req, res, next) {
     if(!req.body.data_nascimento) {
         return res.status(400).send({ message: "Por favor informe a data de nascimento"}) 
@@ -75,5 +82,5 @@ funcao como callback nas funcoes abaixo (get, post, put e delete)
 * Nomes devem ter no mínimo 3 caracteres, permitindo apenas letras ok
 */
 
-module.exports = { validacaoTitulo, validacaoNome, validacaoDataLimite, validarDataNascimento, validacaoIdadeResponsavel }
+module.exports = { validacaoTitulo, validacaoNome, validacaoDataLimite, validarDataNascimento, validacaoIdadeResponsavel, checkDataLImite }
 

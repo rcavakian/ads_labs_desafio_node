@@ -23,7 +23,8 @@ const Tarefa = database.define("tarefas", {
     },
     concluida: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        default: false
     }
 }, {
     timestamp: true

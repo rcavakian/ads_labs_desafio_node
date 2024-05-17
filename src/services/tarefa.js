@@ -1,7 +1,17 @@
 const Tarefa = require("../models/tarefa")
 
-async function list(queryParams) {
-    return await Tarefa.findAll({ where: queryParams})
+/**
+ * Função que lista todas as tarefas na base de dados
+ * @param {*} queryParams 
+ * @returns 
+ */
+async function list() {
+    return await Tarefa.findAll()
+}
+
+async function listAllFromResponsavel(queryParams) {
+    return await Tarefa.findAll({ where: queryParams })
+
 }
 
 async function create(dados) {
@@ -16,6 +26,7 @@ async function update(idTarefa, dados) {
     tarefaEncontrada.descricao = dados.descricao ?? tarefaEncontrada.descricao
     tarefaEncontrada.data_limite_conclusao = dados.data_limite_conclusao ?? tarefaEncontrada.data_limite_conclusao
     tarefaEncontrada.concluida = dados.concluida ?? tarefaEncontrada.concluida
+    tarefaEncontrada.responsavelid = dados.responsavelid ?? tarefaEncontrada.responsavelid
     return tarefaEncontrada
 }
 
@@ -24,6 +35,4 @@ async function remove(idTarefa) {
     await tarefaEncontrada.destroy()
 }
 
-
-
-module.exports = { list, create, update, remove }
+module.exports = { list, listAllFromResponsavel, create, update, remove }

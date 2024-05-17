@@ -1,17 +1,51 @@
-function list(req, res) {
-    return res.status(200).send("Olá")
-}
+const service = require("../services/responsavel")
 
-function update(req, res) {
-    return res.status(200).send("Olá")
+function list(req, res) {
+    service.list(req.query)
+        .then((responsaveis) => {
+            return res.send({ dados: responsaveis})
+        })
 }
 
 function create(req, res) {
-    return res.status(200).send("Olá")
+    service.create(req.body)
+        .then((novoResponsavel) => {
+            return res.status(201).send({
+                message: "Novo responsavel criado",
+                tarefa: novoResponsavel
+            })
+        }, (error) => {
+            return res.send(500).send({
+                message: error
+            })
+        })
+}
+
+function update(req, res) {
+    service.update(req.params.id, req.body)
+        .then((responsavelEditado) => {
+            return res.send({
+                message: "Responsavel editado com sucesso",
+                tarefa: responsavelEditado
+            })
+        }, (error) => {
+            return res.send(500).send({
+                message: error
+            })
+        })
 }
 
 function remove(req, res) {
-    return res.status(200).send("Olá")
-}
+    service.remove(req.params.id)
+    .then((responsavelRemovido) => {
+        return res.send({
+            message: "Responsável removido com sucesso",
+            tarefa: responsavelRemovido
+        })
+    }, (error) => {
+        return res.send(500).send({
+            message: error
+        })
+    })}
 
-module.exports = { list, create, update, remove}
+module.exports = { list, create, update, remove }

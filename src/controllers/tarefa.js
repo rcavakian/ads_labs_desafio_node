@@ -14,15 +14,23 @@ function create(req, res) {
                 message: "Nova tarefa criada",
                 tarefa: novaTarefa
             })
+        }, (error) => {
+            return res.send(500).send({
+                message: error
+            })
         })
 }
 
 function update(req, res) {
-    service.update(req.params.id)
+    service.update(req.params.id, req.body)
         .then((tarefaEditada) => {
             return res.send({
                 message: "Tarefa editada com sucesso",
                 tarefa: tarefaEditada
+            })
+        }, (error) => {
+            return res.send(500).send({
+                message: error
             })
         })
 }

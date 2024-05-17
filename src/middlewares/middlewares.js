@@ -1,3 +1,5 @@
+const { isAlpha } = require("validator")
+
 /**
  * Essa função vai validar as requisições antes de serem enviadas a base de dados
  * @param {*} req 
@@ -20,8 +22,14 @@ function validacaoTitulo(req, res, next) {
  */
 function validacaoNome(req, res, next) {
     const nome = req.body.nome
-    if (!nome || nome.length < 3 || !/^[a-zA-Z]+$/.test(nome)) {
-        return res.status(400).send({ message: "Nome informado inválido"})
+    if (!nome) {
+        return res.status(400).send({ message: "Nome não informado"})
+    }
+    if (nome.length < 3) {
+        return res.status(400).send({ message: "Nome informado precisa ter pelo menos tres caracteres"})
+    }
+    if (!isAlpha(nome, 'pt-BR', { ignore: " " })) {
+        return res.status(400).send({ message: "Nome informado inválido: somente aceito caracteres alfabéticos"})
     }
     return next()
 }
@@ -68,8 +76,8 @@ function checkDataLImite(req, res, next) {
 function validarDataNascimento(req, res, next) {
     if(!req.body.data_nascimento) {
         return res.status(400).send({ message: "Por favor informe a data de nascimento"}) 
-       }
-       return next()
+    }
+    return next()
 }
 /* aqui precisa implementar validação do body, params, head e query para depois chamar essa 
 funcao como callback nas funcoes abaixo (get, post, put e delete)
@@ -83,4 +91,3 @@ funcao como callback nas funcoes abaixo (get, post, put e delete)
 */
 
 module.exports = { validacaoTitulo, validacaoNome, validacaoDataLimite, validarDataNascimento, validacaoIdadeResponsavel, checkDataLImite }
-

@@ -9,8 +9,8 @@ router.get("/", responsavelController.list)
 
 router.post("/", middlewares.validacaoNome, middlewares.validarDataNascimento, middlewares.validacaoIdadeResponsavel, responsavelController.create)
 
-router.put("/", middlewares.validacaoNome, middlewares.validacaoIdadeResponsavel, responsavelController.update)
+router.put("/:id", middlewares.validacaoNome, middlewares.validacaoIdadeResponsavel, responsavelController.update)
 
-router.delete("/id:", responsavelController.remove)
+router.delete("/:id", responsavelController.remove)
 
 module.exports = router

@@ -18,7 +18,13 @@ function create(req, res) {
 }
 
 function update(req, res) {
-    return res.status(200).send("Olá")
+    service.update(req.params.id)
+        .then((tarefaEditada) => {
+            return res.send({
+                message: "Tarefa editada com sucesso",
+                tarefa: tarefaEditada
+            })
+        })
 }
 
 function remove(req, res) {

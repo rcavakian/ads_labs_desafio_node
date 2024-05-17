@@ -42,8 +42,8 @@ function validacaoNome(req, res, next) {
  * @returns 
  */
 function validacaoIdadeResponsavel(req, res, next) { 
-    const data_nascimento = parseInt(req.body.data_nascimento.slice(0, 4))
-    if (data_nascimento >= 2014) {
+    const data_nascimento = parseInt(req.body.data_nascimento.slice(0, 4)) 
+    if (data_nascimento > 2014) {
         return res.status(400).send({ message: "Responsavel invalido, permitido somente nascidos a partir de 2014"})
     }
     return next()

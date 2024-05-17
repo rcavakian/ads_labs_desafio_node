@@ -24,20 +24,24 @@ function create(req, res) {
 function update(req, res) {
     service.update(req.params.id, req.body)
         .then((tarefaEditada) => {
-            return res.send({
+            if (!tarefaEditada) {
+                return res.status(404).send({ message: "Tarefa não encontrada" });
+            }
+            return res.status(201).send({
                 message: "Tarefa editada com sucesso",
                 tarefa: tarefaEditada
             })
         }, (error) => {
-            return res.status(500).send({
-                message: error
-            })
+            return res.status(500).send({ message: error })
         })
 }
 
 function remove(req, res) {
     service.remove(req.params.id)
     .then((tarefaRemovida) => {
+        if (!tarefaRemovida) {
+            return res.status(404).send({ message: "Tarefa não encontrada" });
+        }
         return res.send({
             message: "Tarefa removida com sucesso",
             tarefa: tarefaRemovida

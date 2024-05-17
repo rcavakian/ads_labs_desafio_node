@@ -19,22 +19,27 @@ async function create(dados) {
 }
 
 async function update(idTarefa, dados) {
-    const tarefaEncontrada =  await Tarefa.findbyPk(idTarefa)
-    tarefaEncontrada.nome = dados.nome ?? tarefaEncontrada.nome
-    tarefaEncontrada.titulo = dados.titulo ?? tarefaEncontrada.titulo
-    tarefaEncontrada.descricao = dados.descricao ?? tarefaEncontrada.descricao
-    tarefaEncontrada.data_limite_conclusao = dados.data_limite_conclusao ?? tarefaEncontrada.data_limite_conclusao
-    tarefaEncontrada.concluida = dados.concluida ?? tarefaEncontrada.concluida
-    tarefaEncontrada.responsavelid = dados.responsavelid ?? tarefaEncontrada.responsavelid
-    
-    await tarefaEncontrada.save()
-    
+    const tarefaEncontrada =  await Tarefa.findByPk(idTarefa)
+
+    if (tarefaEncontrada) {
+        tarefaEncontrada.nome = dados.nome ?? tarefaEncontrada.nome
+        tarefaEncontrada.titulo = dados.titulo ?? tarefaEncontrada.titulo
+        tarefaEncontrada.descricao = dados.descricao ?? tarefaEncontrada.descricao
+        tarefaEncontrada.data_limite_conclusao = dados.data_limite_conclusao ?? tarefaEncontrada.data_limite_conclusao
+        tarefaEncontrada.concluida = dados.concluida ?? tarefaEncontrada.concluida
+        tarefaEncontrada.responsaveiId = dados.responsaveiId ?? tarefaEncontrada.responsaveiId
+        await tarefaEncontrada.save()
+    }
     return tarefaEncontrada
 }
 
 async function remove(idTarefa) {
-    const tarefaEncontrada = await Tarefa.findbyPk(idTarefa)
-    await tarefaEncontrada.destroy()
+    const tarefaEncontrada = await Tarefa.findByPk(idTarefa)
+    if (tarefaEncontrada) {
+        await tarefaEncontrada.destroy()    
+    }
+    return tarefaEncontrada
+    
 }
 
 module.exports = { list, listAllFromResponsavel, create, update, remove }

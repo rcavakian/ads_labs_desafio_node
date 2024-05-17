@@ -9,7 +9,7 @@ router.get("/", responsavelController.list)
 
 router.post("/", middlewares.validacaoNome, middlewares.validarDataNascimento, middlewares.validacaoIdadeResponsavel, responsavelController.create)
 
-router.put("/:id", middlewares.validacaoNome, middlewares.validacaoIdadeResponsavel, responsavelController.update)
+router.put("/:id", middlewares.validacaoNome, responsavelController.update)
 
 router.delete("/:id", responsavelController.remove)
 

@@ -1,7 +1,7 @@
 const Responsavel = require("../models/responsavel")
 
-async function list() {
-    return await Responsavel.findAll()
+async function list(queryParams) {
+    return await Responsavel.findAll({ where: queryParams })
 }
 
 async function create(dados) {
@@ -10,7 +10,7 @@ async function create(dados) {
 }
 
 async function update(idResponsavel, dados) {
-    const responsavelEncontrado =  await Responsavel.findbyPk(idResponsavel)
+    const responsavelEncontrado =  await Responsavel.findByPk(idResponsavel)
     
     if (responsavelEncontrado) {
         responsavelEncontrado.nome = dados.nome ?? responsavelEncontrado.nome
@@ -21,8 +21,12 @@ async function update(idResponsavel, dados) {
 }
 
 async function remove(idResponsavel) {
-    const responsavelEncontrado = await Responsavel.findbyPk(idResponsavel)
-    await responsavelEncontrado.destroy()
+    const responsavelEncontrado = await Responsavel.findByPk(idResponsavel)
+    if (responsavelEncontrado) {
+        await responsavelEncontrado.destroy()
+    }
+    return responsavelEncontrado
 }
+    
 
 module.exports = { list, create, update, remove }

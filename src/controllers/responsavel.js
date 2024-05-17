@@ -15,7 +15,7 @@ function create(req, res) {
                 tarefa: novoResponsavel
             })
         }, (error) => {
-            return res.send(500).send({
+            return res.status(500).send({
                 message: error
             })
         })
@@ -29,7 +29,7 @@ function update(req, res) {
                 tarefa: responsavelEditado
             })
         }, (error) => {
-            return res.send(500).send({
+            return res.status(500).send({
                 message: error
             })
         })
@@ -43,7 +43,7 @@ function remove(req, res) {
             tarefa: responsavelRemovido
         })
     }, (error) => {
-        return res.send(500).send({
+        return res.status(500).send({
             message: error
         })
     })}

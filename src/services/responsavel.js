@@ -11,9 +11,12 @@ async function create(dados) {
 
 async function update(idResponsavel, dados) {
     const responsavelEncontrado =  await Responsavel.findbyPk(idResponsavel)
-    responsavelEncontrado.nome = dados.nome ?? responsavelEncontrado.nome
-    responsavelEncontrado.data_nascimento = dados.data_nascimento ?? responsavelEncontrado.data_nascimento
-
+    
+    if (responsavelEncontrado) {
+        responsavelEncontrado.nome = dados.nome ?? responsavelEncontrado.nome
+        responsavelEncontrado.data_nascimento = dados.data_nascimento ?? responsavelEncontrado.data_nascimento
+        await responsavelEncontrado.save()
+    }
     return responsavelEncontrado
 }
 

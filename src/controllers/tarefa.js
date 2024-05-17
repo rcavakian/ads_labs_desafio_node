@@ -15,7 +15,7 @@ function create(req, res) {
                 tarefa: novaTarefa
             })
         }, (error) => {
-            return res.send(500).send({
+            return res.status(500).send({
                 message: error
             })
         })
@@ -29,7 +29,7 @@ function update(req, res) {
                 tarefa: tarefaEditada
             })
         }, (error) => {
-            return res.send(500).send({
+            return res.status(500).send({
                 message: error
             })
         })
@@ -43,7 +43,7 @@ function remove(req, res) {
             tarefa: tarefaRemovida
         })
     }, (error) => {
-        return res.send(500).send({
+        return res.status(500).send({
             message: error
         })
     })}

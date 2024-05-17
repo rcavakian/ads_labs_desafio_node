@@ -27,6 +27,8 @@ async function update(idTarefa, dados) {
     tarefaEncontrada.concluida = dados.concluida ?? tarefaEncontrada.concluida
     tarefaEncontrada.responsavelid = dados.responsavelid ?? tarefaEncontrada.responsavelid
     
+    await tarefaEncontrada.save()
+    
     return tarefaEncontrada
 }
 

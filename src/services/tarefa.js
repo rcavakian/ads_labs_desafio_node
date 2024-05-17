@@ -11,7 +11,11 @@ async function create(dados) {
 
 async function update(idTarefa, dados) {
     const tarefaEncontrada =  await Tarefa.findbyPk(idTarefa)
-    tarefaEncontrada.nome = dados.nome
+    tarefaEncontrada.nome = dados.nome ?? tarefaEncontrada.nome
+    tarefaEncontrada.titulo = dados.titulo ?? tarefaEncontrada.titulo
+    tarefaEncontrada.descricao = dados.descricao ?? tarefaEncontrada.descricao
+    tarefaEncontrada.data_limite_conclusao = dados.data_limite_conclusao ?? tarefaEncontrada.data_limite_conclusao
+    tarefaEncontrada.concluida = dados.concluida ?? tarefaEncontrada.concluida
     return tarefaEncontrada
 }
 

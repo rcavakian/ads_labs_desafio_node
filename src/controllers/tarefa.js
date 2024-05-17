@@ -10,7 +10,7 @@ function list(req, res) {
 function create(req, res) {
     service.create(req.body)
         .then((novaTarefa) => {
-            return res.send({
+            return res.status(201).send({
                 message: "Nova tarefa criada",
                 tarefa: novaTarefa
             })
@@ -36,7 +36,16 @@ function update(req, res) {
 }
 
 function remove(req, res) {
-    return res.status(200).send("Olá")
-}
+    service.remove(req.params.id)
+    .then((tarefaRemovida) => {
+        return res.send({
+            message: "Tarefa removida com sucesso",
+            tarefa: tarefaRemovida
+        })
+    }, (error) => {
+        return res.send(500).send({
+            message: error
+        })
+    })}
 
 module.exports = { list, create, update, remove }

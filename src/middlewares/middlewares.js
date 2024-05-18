@@ -1,4 +1,6 @@
 const { isAlpha } = require("validator")
+const Tarefa = require("../models/tarefa");
+
 
 /**
  * Essa função vai validar as requisições antes de serem enviadas a base de dados
@@ -50,7 +52,7 @@ function validacaoIdadeResponsavel(req, res, next) {
 }
 
 /**
- * Função para verificr se a tarefa está sendo concluida dentro do prazo limite, até a data limite de conclusão
+ * Função para verificar se a tarefa está sendo concluida dentro do prazo limite
  * @param {*} req 
  * @param {*} res 
  * @param {*} next 
@@ -79,15 +81,6 @@ function validarDataNascimento(req, res, next) {
     }
     return next()
 }
-/* aqui precisa implementar validação do body, params, head e query para depois chamar essa 
-funcao como callback nas funcoes abaixo (get, post, put e delete)
-*/ 
 
-/*
-    As seguintes regras de negócio devem ser validadas:
-* As tarefas que passaram da data limite não podem ser Nnalizadas posteriormente
-* Um responsável deve ser nascido no mínimo em 2014 ok
-* Nomes devem ter no mínimo 3 caracteres, permitindo apenas letras ok
-*/
 
 module.exports = { validacaoTitulo, validacaoNome, validacaoDataLimite, validarDataNascimento, validacaoIdadeResponsavel, checkDataLImite }

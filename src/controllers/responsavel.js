@@ -7,17 +7,6 @@ function list(req, res) {
         })
 }
 
-function listarResponsaveisSemTarefasPendentes(req, res) {
-    service.listarResponsaveisSemTarefasPendentes()
-        .then((responsaveis) => {
-            return res.status(200).json(responsaveis);
-        })
-        .catch((error) => {
-            console.error("Erro ao listar responsáveis sem tarefas pendentes:", error);
-            return res.status(500).send({ message: "Erro interno no servidor" });
-        });
-}
-
 function create(req, res) {
     service.create(req.body)
         .then((novoResponsavel) => {
@@ -63,4 +52,4 @@ function remove(req, res) {
         })
     })}
 
-module.exports = { list, listarResponsaveisSemTarefasPendentes, create, update, remove }
+module.exports = { list, create, update, remove }

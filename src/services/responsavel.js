@@ -7,28 +7,6 @@ async function list(queryParams) {
     return await Responsavel.findAll({ where: queryParams })
 }
 
-async function listarResponsaveisSemTarefasPendentes() {
-    try {
-      const responsaveis = await Sequelize.query(
-        `
-        SELECT "responsaveis"."id", "responsaveis"."nome", "responsaveis"."data_nascimento", 
-               "responsaveis"."createdAt", "responsaveis"."updatedAt"
-        FROM "responsaveis"
-        LEFT JOIN "tarefas" ON "responsaveis"."id" = "tarefas"."responsavelid" AND "tarefas"."concluida" = false
-        GROUP BY "responsaveis"."id"
-        HAVING COUNT("tarefas"."id") = 0;
-        `,
-        { type: Sequelize.QueryTypes.SELECT }
-      );
-      return responsaveis;
-    } catch (error) {
-      console.error('Erro ao listar responsáveis sem tarefas pendentes:', error);
-      throw error;
-    }
-  }
-  
-
-
 async function create(dados) {
     const novoResponsavel = await Responsavel.create(dados)
     return novoResponsavel
@@ -54,4 +32,4 @@ async function remove(idResponsavel) {
 }
     
 
-module.exports = { list, listarResponsaveisSemTarefasPendentes, create, update, remove }
+module.exports = { list, create, update, remove }

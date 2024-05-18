@@ -27,7 +27,7 @@ async function update(idTarefa, dados) {
         tarefaEncontrada.descricao = dados.descricao ?? tarefaEncontrada.descricao
         tarefaEncontrada.data_limite_conclusao = dados.data_limite_conclusao ?? tarefaEncontrada.data_limite_conclusao
         tarefaEncontrada.concluida = dados.concluida ?? tarefaEncontrada.concluida
-        tarefaEncontrada.responsaveiId = dados.responsaveiId ?? tarefaEncontrada.responsaveiId
+        tarefaEncontrada.responsavelid = dados.responsavelid ?? tarefaEncontrada.responsavelid
         await tarefaEncontrada.save()
     }
     return tarefaEncontrada

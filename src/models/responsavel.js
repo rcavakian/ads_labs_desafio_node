@@ -1,5 +1,6 @@
 const database = require("../database/database")
 const Sequelize = require("sequelize")
+const Tarefa = require("../models/tarefa"); 
 
 const Responsavel = database.define ("responsaveis", {
     id: {
@@ -18,5 +19,7 @@ const Responsavel = database.define ("responsaveis", {
 }, {
     timestamp: true
 })
+
+Responsavel.hasMany(Tarefa, { as: 'tarefas', foreignKey: 'responsavelid' });
 
 module.exports = Responsavel

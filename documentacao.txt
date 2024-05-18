@@ -1,0 +1,112 @@
+GET /responsavel : Lista todos os responsáveis
+{
+    "id",
+    "nome",
+    "data_nascimento"
+}
+- Nenhum parâmetro necessário.
+
+GET /responsavel/:id : Obtém um responsável específico pelo ID
+{
+    "id",
+    "nome",
+    "data_nascimento"
+}
+- :id é um parâmetro obrigatório que especifica o ID do responsável.
+
+POST /responsavel : Cria um novo responsável
+{
+    "nome",
+    "data_nascimento"
+}
+- O corpo da requisição deve conter os atributos "nome" e "data_nascimento".
+
+PUT /responsavel/:id : Atualiza um responsável específico pelo ID
+{
+    "nome",
+    "data_nascimento"
+}
+- :id é um parâmetro obrigatório que especifica o ID do responsável.
+- O corpo da requisição pode conter os atributos "nome" e "data_nascimento".
+- Todos os atributos são opcionais e só precisam ser incluídos se estiverem sendo atualizados.
+
+DELETE /responsavel/:id : Deleta um responsável específico pelo ID
+- :id é um parâmetro obrigatório que especifica o ID do responsável.
+
+GET /tarefa : Lista todas as tarefas
+{
+    "id",
+    "titulo",
+    "descricao",
+    "data_limite_conclusao",
+    "concluida"
+    "responsavelid"
+}
+- Nenhum parâmetro necessário.
+
+GET /tarefa/:id : Obtém uma tarefa específica pelo ID
+{
+    "id",
+    "titulo",
+    "descricao",
+    "data_limite_conclusao",
+    "concluida"
+    "responsavelid"
+}
+- :id é um parâmetro obrigatório que especifica o ID da tarefa.
+
+POST /tarefa : Cria uma nova tarefa
+{
+    "titulo",
+    "descricao",
+    "data_limite_conclusao",
+    "concluida"
+}
+- O corpo da requisição deve conter os atributos "titulo", "data_limite_conclusao", e "concluida". "descricao" é opcional.
+
+PUT /tarefa/:id : Atualiza uma tarefa específica pelo ID
+{
+    "titulo",
+    "descricao",
+    "data_limite_conclusao",
+    "concluida"
+    "responsavelid"
+}
+- :id é um parâmetro obrigatório que especifica o ID da tarefa.
+- O corpo da requisição pode conter os atributos "titulo", "descricao", "data_limite_conclusao", "concluida" e "responsavelid".
+- Todos os atributos são opcionais e só precisam ser incluídos se estiverem sendo atualizados.
+
+DELETE /tarefa/:id : Deleta uma tarefa específica pelo ID
+- :id é um parâmetro obrigatório que especifica o ID da tarefa.
+
+GET /tarefa?responsavelid=:id : Listar todas as tarefas de um responsável específico
+{
+    "id",
+    "titulo",
+    "descricao",
+    "data_limite_conclusao",
+    "concluida"
+    "responsavelid"
+
+}
+- :id é um parâmetro obrigatório que especifica o ID do responsável.
+
+GET /tarefa?responsavelid=:id&concluida=false : Lista todas as tarefas pendentes de um responsável específico
+{
+    "id",
+    "titulo",
+    "descricao",
+    "data_limite_conclusao",
+    "concluida",
+    "responsavelid"
+}
+- :id é um parâmetro obrigatório que especifica o ID do responsável.
+- Retorna apenas as tarefas onde "concluida" é false.
+
+GET /responsavel/sem-tarefas-pendentes : Lista todos os responsáveis que não possuem tarefas pendentes
+{
+    "id",
+    "nome",
+    "data_nascimento"
+}
+- Nenhum parâmetro necessário.

@@ -89,9 +89,9 @@ GET /tarefa?responsavelid=:id : Listar todas as tarefas de um responsável espec
     "responsavelid"
 
 }
-- :id é um parâmetro obrigatório que especifica o ID do responsável.
+- :responsavelidid é um parâmetro obrigatório que especifica o ID do responsável.
 
-GET /tarefa?responsavelid=:id&concluida=false : Lista todas as tarefas pendentes de um responsável específico
+GET /tarefa/responsavel/:responsavelid/tarefas-pendentes : Lista todas as tarefas pendentes de um responsável específico
 {
     "id",
     "titulo",
@@ -100,7 +100,7 @@ GET /tarefa?responsavelid=:id&concluida=false : Lista todas as tarefas pendentes
     "concluida",
     "responsavelid"
 }
-- :id é um parâmetro obrigatório que especifica o ID do responsável.
+- :responsavelidid é um parâmetro obrigatório que especifica o ID do responsável.
 - Retorna apenas as tarefas onde "concluida" é false.
 
 GET /tarefa?responsavelid=2&&concluida=true : Lista todos os responsáveis que não possuem tarefas pendentes

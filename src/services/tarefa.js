@@ -1,4 +1,5 @@
-const Tarefa = require("../models/tarefa")
+const Tarefa = require("../models/tarefa");
+const { Op } = require("sequelize");
 
 /**
  * Função que lista todas as tarefas na base de dados
@@ -9,9 +10,31 @@ async function list(queryParams) {
     return await Tarefa.findAll({ where: queryParams })
 }
 
-async function listAllFromResponsavel(queryParams) {
-    return await Tarefa.findAll({ where: queryParams })
+/**
+ * Lista todas as tarefas pendentes de um responsável
+ * @param {number} responsavelId 
+ * @returns {Promise<Array>}
+ */
+async function listarTarefasPendentes(responsavelId) {
+    try {
+        console.log(`Buscando tarefas pendentes para o responsável com ID: ${responsavelId}`);
+        const tarefas = await Tarefa.findAll({
+            where: {
+                responsavelid: responsavelId,  
+                concluida: false,  
+                data_limite_conclusao: {
+                    [Op.gte]: new Date()
+                }
+            }
+        });
+        console.log(`Tarefas encontradas: ${tarefas.length}`);
+        return tarefas;
+    } catch (error) {
+        console.error(`Erro ao buscar tarefas pendentes: ${error.message}`);
+        throw error;
+    }
 }
+
 
 async function create(dados) {
     const novaTarefa = await Tarefa.create(dados)
@@ -42,4 +65,4 @@ async function remove(idTarefa) {
     
 }
 
-module.exports = { list, listAllFromResponsavel, create, update, remove }
+module.exports = { list, listarTarefasPendentes, create, update, remove }

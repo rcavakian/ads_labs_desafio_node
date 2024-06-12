@@ -13,4 +13,7 @@ router.put("/:id", middlewares.validacaoDataLimite, tarefaController.update)
 
 router.delete("/:id", tarefaController.remove)
 
+router.get("/responsavel/:responsavelId/tarefas-pendentes", tarefaController.listarTarefasPendentes);
+
+
 module.exports = router

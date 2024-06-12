@@ -7,6 +7,23 @@ function list(req, res) {
         })
 }
 
+/**
+ * Controller para listar todas as tarefas pendentes de um responsável
+ * @param {Request} req 
+ * @param {Response} res 
+ */
+async function listarTarefasPendentes(req, res) {
+    try {
+        const { responsavelId } = req.params;
+        console.log(`Responsavel ID: ${responsavelId}`);
+        const tarefasPendentes = await service.listarTarefasPendentes(responsavelId);
+        res.json(tarefasPendentes);
+    } catch (error) {
+        console.error(`Erro ao listar tarefas pendentes: ${error.message}`);
+        res.status(500).json({ error: `Erro ao listar tarefas pendentes: ${error.message}` });
+    }
+}
+
 function create(req, res) {
     service.create(req.body)
         .then((novaTarefa) => {
@@ -52,4 +69,4 @@ function remove(req, res) {
         })
     })}
 
-module.exports = { list, create, update, remove }
+module.exports = { list, listarTarefasPendentes, create, update, remove }

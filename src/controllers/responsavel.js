@@ -7,6 +7,16 @@ function list(req, res) {
         })
 }
 
+async function listarSemTarefasPendentes(req, res) {
+    try {
+        const responsaveisSemTarefasPendentes = await service.listarSemTarefasPendentes();
+        res.json(responsaveisSemTarefasPendentes);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao listar responsáveis sem tarefas pendentes' });
+    }
+}
+
+
 function create(req, res) {
     service.create(req.body)
         .then((novoResponsavel) => {
@@ -52,4 +62,4 @@ function remove(req, res) {
         })
     })}
 
-module.exports = { list, create, update, remove }
+module.exports = { list, listarSemTarefasPendentes, create, update, remove }

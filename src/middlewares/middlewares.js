@@ -52,20 +52,32 @@ function validacaoIdadeResponsavel(req, res, next) {
 }
 
 /**
- * Função para verificar se a tarefa está sendo concluida dentro do prazo limite
+ * Função para verificar se a tarefa está sendo concluída dentro do prazo limite
  * @param {*} req 
  * @param {*} res 
  * @param {*} next 
  * @returns 
  */
-function validacaoDataLimite(req, res, next) { 
-    const data_limite = new Date(req.body.data_limite_conclusao)
-    const data_atual = new Date()
+async function validacaoDataLimite(req, res, next) { 
+    const tarefaId = req.params.id;
+    try {
+        const tarefa = await Tarefa.findByPk(tarefaId);
+        if (!tarefa) {
+            return res.status(404).send({ message: "Tarefa não encontrada" });
+        }
 
-    if (data_limite < data_atual) {
-        return res.status(400).send({ message: "Não é possível concluir essa tarefa: tarefa em atraso" })
+        const data_limite = new Date(tarefa.data_limite_conclusao); // Aqui obtém a data limite do banco de dados
+        const data_atual = new Date();
+
+        // Verifica se a data limite passou e se a tarefa está sendo marcada como concluída
+        if (data_limite < data_atual && req.body.concluida) {
+            return res.status(400).send({ message: "Não é possível concluir essa tarefa: tarefa em atraso" });
+        }
+
+        next();
+    } catch (error) {
+        return res.status(500).send({ message: "Erro ao validar a data limite da tarefa" });
     }
-    return next()
 }
 
 function checkDataLImite(req, res, next) {

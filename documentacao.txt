@@ -87,7 +87,6 @@ GET /tarefa?responsavelid=:id : Listar todas as tarefas de um responsável espec
     "data_limite_conclusao",
     "concluida"
     "responsavelid"
-
 }
 - :responsavelidid é um parâmetro obrigatório que especifica o ID do responsável.
 

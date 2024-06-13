@@ -1,10 +1,37 @@
 const Responsavel = require("../models/responsavel")
 const Tarefa = require("../models/tarefa")
-const Sequelize = require('sequelize')
+const { Op } = require('sequelize')
 
 
 async function list(queryParams) {
     return await Responsavel.findAll({ where: queryParams })
+}
+
+/**
+ * Função que lista responsáveis sem tarefas pendentes
+ * @returns {Promise<Array>}
+ */
+async function listarSemTarefasPendentes() {
+    const responsaveisComTarefasPendentes = await Tarefa.findAll({
+        attributes: ['responsavelid'],
+        where: {
+            concluida: false,
+            data_limite_conclusao: {
+                [Op.gte]: new Date()
+            }
+        },
+        group: ['responsavelid']
+    });
+
+    const responsavelIdsComTarefasPendentes = responsaveisComTarefasPendentes.map(tarefa => tarefa.responsavelid);
+
+    return await Responsavel.findAll({
+        where: {
+            id: {
+                [Op.notIn]: responsavelIdsComTarefasPendentes
+            }
+        }
+    });
 }
 
 async function create(dados) {
@@ -32,4 +59,4 @@ async function remove(idResponsavel) {
 }
     
 
-module.exports = { list, create, update, remove }
+module.exports = { list, listarSemTarefasPendentes, create, update, remove }

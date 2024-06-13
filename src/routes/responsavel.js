@@ -5,6 +5,8 @@ const router = express.Router()
 
 router.get("/", responsavelController.list)
 
+router.get("/sem-tarefas-pendentes", responsavelController.listarSemTarefasPendentes)
+
 router.post("/", middlewares.validacaoNome, middlewares.validarDataNascimento, middlewares.validacaoIdadeResponsavel, responsavelController.create)
 
 router.put("/:id", middlewares.validacaoNome, responsavelController.update)

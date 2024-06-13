@@ -6,6 +6,8 @@ COPY package*.json /usr/app
 
 RUN npm install
 
+RUN npm audit fix
+
 COPY ./src .
 
 EXPOSE 3000

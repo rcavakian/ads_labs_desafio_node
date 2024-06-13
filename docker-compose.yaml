@@ -6,21 +6,24 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
-      - DATABASE_URL=postgres://postgres:password@db:5432/aula_node
+      - PORT=${PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DIALECT=${DB_DIALECT}
+      - DB_HOST=${DB_HOST}
     depends_on:
       - db
-    links:
-      - db
     volumes:
-      - ./src:/usr/src/app
+      - .:/usr/app/src
+    command: npm start
 
   db:
     image: postgres:latest
     environment:
-      - POSTGRES_DB=aula_node
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
